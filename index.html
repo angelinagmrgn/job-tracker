@@ -1,0 +1,1948 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Job Application Tracker 🚀</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #f0fdf9 0%, #e0f7f4 100%);
+            padding: 20px;
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100vw;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        header {
+            background: linear-gradient(135deg, #219c91 0%, #1a8078 100%);
+            padding: 40px 35px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(33, 156, 145, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -5%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -5%;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            color: white;
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            word-wrap: break-word;
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 16px;
+            font-weight: 500;
+            word-wrap: break-word;
+        }
+
+        .motivation-text {
+            margin-top: 15px;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            border-left: 4px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
+        }
+
+        .motivation-text p {
+            color: white;
+            font-size: 14px;
+            font-weight: 500;
+            font-style: italic;
+            line-height: 1.5;
+            word-wrap: break-word;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            background: white;
+            padding: 8px;
+            border-radius: 16px;
+            box-shadow: 0 2px 10px rgba(33, 156, 145, 0.08);
+        }
+
+        .nav-tab {
+            flex: 1;
+            padding: 12px 20px;
+            background: transparent;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #64748b;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-tab.active {
+            background: linear-gradient(135deg, #219c91 0%, #1a8078 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(33, 156, 145, 0.3);
+        }
+
+        .nav-tab:hover:not(.active) {
+            background: #f0fdf9;
+            color: #219c91;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .tips-section {
+            background: white;
+            padding: 35px 30px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(33, 156, 145, 0.08);
+            border: 2px solid #e0f7f4;
+        }
+
+        .tips-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .tips-header h2 {
+            font-size: 28px;
+            color: #1e293b;
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+
+        .tips-header p {
+            color: #64748b;
+            font-size: 16px;
+        }
+
+        .tips-category {
+            margin-bottom: 35px;
+        }
+
+        .tips-category:last-child {
+            margin-bottom: 0;
+        }
+
+        .tips-category h3 {
+            font-size: 22px;
+            color: #219c91;
+            margin-bottom: 20px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tips-list {
+            display: grid;
+            gap: 16px;
+        }
+
+        .tip-item {
+            background: linear-gradient(135deg, #f0fdf9 0%, #e0f7f4 100%);
+            padding: 20px;
+            border-radius: 14px;
+            border-left: 4px solid #219c91;
+        }
+
+        .tip-item h4 {
+            font-size: 16px;
+            color: #1e293b;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .tip-item p {
+            color: #475569;
+            font-size: 14px;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .tip-item ul {
+            margin-top: 10px;
+            margin-left: 20px;
+            color: #475569;
+            font-size: 14px;
+        }
+
+        .tip-item li {
+            margin-bottom: 5px;
+        }
+
+        .checklist-section {
+            background: white;
+            padding: 35px 30px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(33, 156, 145, 0.08);
+            border: 2px solid #e0f7f4;
+        }
+
+        .checklist-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .checklist-header h2 {
+            font-size: 28px;
+            color: #1e293b;
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+
+        .checklist-header p {
+            color: #64748b;
+            font-size: 16px;
+        }
+
+        .checklist-category {
+            margin-bottom: 25px;
+        }
+
+        .checklist-category h3 {
+            font-size: 20px;
+            color: #219c91;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .checklist-items {
+            display: grid;
+            gap: 10px;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: start;
+            gap: 12px;
+            padding: 14px 16px;
+            background: #f8fafc;
+            border-radius: 10px;
+            border: 2px solid #e2e8f0;
+            transition: all 0.2s ease;
+        }
+
+        .checklist-item:hover {
+            border-color: #219c91;
+            background: #f0fdf9;
+        }
+
+        .checklist-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-top: 2px;
+            cursor: pointer;
+            accent-color: #219c91;
+        }
+
+        .checklist-item label {
+            flex: 1;
+            margin: 0;
+            font-size: 15px;
+            font-weight: 500;
+            color: #1e293b;
+            cursor: pointer;
+            line-height: 1.5;
+        }
+
+        .checklist-item input[type="checkbox"]:checked + label {
+            text-decoration: line-through;
+            color: #94a3b8;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 28px 24px;
+            border-radius: 18px;
+            box-shadow: 0 4px 20px rgba(33, 156, 145, 0.08);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #219c91, #1a8078);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(33, 156, 145, 0.15);
+            border-color: #219c91;
+        }
+
+        .stat-label {
+            color: #64748b;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .stat-value {
+            color: #219c91;
+            font-size: 42px;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .form-section, .export-import-section {
+            background: white;
+            padding: 35px 30px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(33, 156, 145, 0.08);
+            border: 2px solid #e0f7f4;
+        }
+
+        .form-title {
+            font-size: 22px;
+            color: #1e293b;
+            margin-bottom: 25px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .salary-group {
+            display: grid;
+            grid-template-columns: 110px 1fr 30px 1fr;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .salary-group select {
+            padding-right: 8px;
+        }
+
+        .salary-separator {
+            text-align: center;
+            color: #64748b;
+            font-weight: 600;
+        }
+
+        label {
+            color: #1e293b;
+            font-size: 14px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        input, select, textarea {
+            padding: 12px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            background: #f8fafc;
+            width: 100%;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #219c91;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(33, 156, 145, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        button {
+            background: linear-gradient(135deg, #219c91 0%, #1a8078 100%);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(33, 156, 145, 0.3);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(33, 156, 145, 0.4);
+        }
+
+        .applications-list {
+            display: grid;
+            gap: 20px;
+        }
+
+        .app-card {
+            background: white;
+            padding: 28px;
+            border-radius: 18px;
+            box-shadow: 0 4px 20px rgba(33, 156, 145, 0.08);
+            border-left: 5px solid #219c91;
+            transition: all 0.3s ease;
+        }
+
+        .app-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 8px 30px rgba(33, 156, 145, 0.15);
+        }
+
+        .app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 16px;
+        }
+
+        .app-title {
+            flex: 1;
+        }
+
+        .company {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 6px;
+            word-wrap: break-word;
+        }
+
+        .position {
+            color: #64748b;
+            font-size: 15px;
+            font-weight: 500;
+            word-wrap: break-word;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 25px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-applied { background: #dbeafe; color: #1e40af; }
+        .status-interview { background: #fae8ff; color: #7e22ce; }
+        .status-offer { background: #d1fae5; color: #065f46; }
+        .status-rejected { background: #fee2e2; color: #991b1b; }
+        .status-wishlist { background: #fef3c7; color: #92400e; }
+
+        .app-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 2px solid #f1f5f9;
+        }
+
+        .detail-item {
+            color: #64748b;
+            font-size: 14px;
+            font-weight: 500;
+            word-wrap: break-word;
+        }
+
+        .detail-label {
+            font-weight: 700;
+            color: #1e293b;
+            margin-right: 6px;
+        }
+
+        .app-notes {
+            margin-top: 16px;
+            padding: 16px;
+            background: linear-gradient(135deg, #f0fdf9 0%, #e0f7f4 100%);
+            border-radius: 12px;
+            font-size: 14px;
+            color: #1e293b;
+            border-left: 3px solid #219c91;
+            word-wrap: break-word;
+        }
+
+        .app-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .btn-edit, .btn-delete {
+            padding: 8px 18px;
+            font-size: 13px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .btn-edit {
+            background: linear-gradient(135deg, #64748b 0%, #475569 100%);
+        }
+
+        .btn-delete {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(33, 156, 145, 0.08);
+        }
+
+        .empty-state-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+
+        .empty-state p {
+            color: #64748b;
+            font-size: 16px;
+            margin-bottom: 20px;
+            word-wrap: break-word;
+        }
+
+        .empty-state-motivation {
+            max-width: 500px;
+            margin: 0 auto 20px;
+            padding: 14px 16px;
+            background: linear-gradient(135deg, #f0fdf9 0%, #e0f7f4 100%);
+            border-radius: 10px;
+            border-left: 3px solid #219c91;
+        }
+
+        .empty-state-motivation p {
+            color: #1e293b;
+            font-weight: 600;
+            font-style: italic;
+            margin: 0;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #219c91 0%, #1a8078 100%);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(33, 156, 145, 0.3);
+        }
+
+        .export-import-section {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            justify-content: space-between;
+            padding: 25px 30px;
+        }
+
+        .export-import-section h3 {
+            font-size: 18px;
+            color: #1e293b;
+            font-weight: 700;
+            flex: 1;
+        }
+
+        .export-import-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-export, .btn-import {
+            padding: 12px 24px;
+            font-size: 14px;
+        }
+
+        .btn-import {
+            background: linear-gradient(135deg, #64748b 0%, #475569 100%);
+        }
+
+        #importFile {
+            display: none;
+        }
+
+        /* MOBILE RESPONSIVE */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                width: 100%;
+            }
+
+            header {
+                padding: 20px 16px;
+                margin-bottom: 16px;
+                border-radius: 16px;
+            }
+
+            header::before,
+            header::after {
+                display: none;
+            }
+
+            h1 {
+                font-size: 20px;
+                line-height: 1.3;
+            }
+
+            .subtitle {
+                font-size: 13px;
+            }
+
+            .motivation-text {
+                padding: 12px 14px;
+                margin-top: 10px;
+            }
+
+            .motivation-text p {
+                font-size: 12px;
+            }
+
+            .nav-tabs {
+                gap: 6px;
+                padding: 6px;
+                margin-bottom: 16px;
+            }
+
+            .nav-tab {
+                padding: 10px 12px;
+                font-size: 13px;
+            }
+
+            .tips-section {
+                padding: 20px 16px;
+            }
+
+            .tips-header {
+                margin-bottom: 25px;
+            }
+
+            .tips-header h2 {
+                font-size: 22px;
+            }
+
+            .tips-header p {
+                font-size: 14px;
+            }
+
+            .tips-category {
+                margin-bottom: 25px;
+            }
+
+            .tips-category h3 {
+                font-size: 18px;
+                margin-bottom: 15px;
+            }
+
+            .tip-item {
+                padding: 16px;
+            }
+
+            .tip-item h4 {
+                font-size: 15px;
+            }
+
+            .tip-item p, .tip-item ul {
+                font-size: 13px;
+            }
+
+            .checklist-section {
+                padding: 20px 16px;
+                margin-bottom: 16px;
+            }
+
+            .checklist-header {
+                margin-bottom: 20px;
+            }
+
+            .checklist-header h2 {
+                font-size: 22px;
+            }
+
+            .checklist-header p {
+                font-size: 14px;
+            }
+
+            .checklist-category h3 {
+                font-size: 18px;
+                margin-bottom: 12px;
+            }
+
+            .checklist-item {
+                padding: 12px 14px;
+            }
+
+            .checklist-item label {
+                font-size: 14px;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+                margin-bottom: 16px;
+            }
+
+            .stat-card {
+                padding: 16px 12px;
+                border-radius: 14px;
+            }
+
+            .stat-label {
+                font-size: 10px;
+                margin-bottom: 6px;
+            }
+
+            .stat-value {
+                font-size: 26px;
+            }
+
+            .form-section, .export-import-section {
+                padding: 20px 16px;
+                margin-bottom: 16px;
+                border-radius: 16px;
+            }
+
+            .form-title {
+                font-size: 17px;
+                margin-bottom: 16px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+
+            .salary-group {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .salary-group select {
+                font-size: 16px;
+                padding: 12px 14px;
+            }
+
+            .salary-separator {
+                display: none;
+            }
+
+            #salaryMin::placeholder,
+            #salaryMax::placeholder {
+                font-size: 14px;
+            }
+
+            #salaryMin {
+                order: 1;
+            }
+
+            #salaryMax {
+                order: 2;
+            }
+
+            .salary-group select {
+                order: 0;
+            }
+
+            label {
+                font-size: 13px;
+            }
+
+            input, select, textarea {
+                font-size: 16px;
+                padding: 12px 14px;
+            }
+
+            button {
+                width: 100%;
+                padding: 14px 16px;
+            }
+
+            .app-card {
+                padding: 18px 16px;
+                border-radius: 16px;
+            }
+
+            .app-header {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+
+            .company {
+                font-size: 18px;
+            }
+
+            .position {
+                font-size: 14px;
+            }
+
+            .status-badge {
+                font-size: 11px;
+                padding: 5px 12px;
+            }
+
+            .app-details {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .detail-item {
+                font-size: 13px;
+            }
+
+            .app-notes {
+                font-size: 13px;
+                padding: 12px;
+            }
+
+            .app-actions {
+                gap: 8px;
+            }
+
+            .btn-edit, .btn-delete {
+                flex: 1;
+                padding: 10px 12px;
+                font-size: 13px;
+            }
+
+            .empty-state {
+                padding: 40px 16px;
+            }
+
+            .empty-state-icon {
+                font-size: 48px;
+            }
+
+            .empty-state p {
+                font-size: 14px;
+            }
+
+            .empty-state-motivation {
+                padding: 12px 14px;
+            }
+
+            .empty-state-motivation p {
+                font-size: 13px;
+            }
+
+            .cta-button {
+                width: 100%;
+                padding: 14px 20px;
+            }
+
+            .export-import-section {
+                flex-direction: column;
+                gap: 12px;
+                align-items: stretch;
+            }
+
+            .export-import-section h3 {
+                font-size: 15px;
+                text-align: center;
+            }
+
+            .export-import-buttons {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .btn-export, .btn-import {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 18px;
+            }
+
+            .subtitle {
+                font-size: 12px;
+            }
+
+            .stat-value {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1>🚀 Job Application Tracker</h1>
+            </div>
+        </header>
+
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="switchTab('tracker')">📋 Tracker</button>
+            <button class="nav-tab" onclick="switchTab('checklist')">✅ Checklist</button>
+            <button class="nav-tab" onclick="switchTab('tips')">💡 Tips & Tricks</button>
+        </div>
+
+        <div id="tracker-tab" class="tab-content active">
+
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-label">Total Lamaran</div>
+                <div class="stat-value" id="stat-total">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Sudah Lamar</div>
+                <div class="stat-value" id="stat-applied">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Interview</div>
+                <div class="stat-value" id="stat-interview">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Offer Diterima</div>
+                <div class="stat-value" id="stat-offer">0</div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <div class="form-title" id="form-title">✨ Tambah Lamaran Baru</div>
+            <form id="jobForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Nama Perusahaan *</label>
+                        <input type="text" id="company" required placeholder="Nama perusahaan yang kamu lamar">
+                    </div>
+                    <div class="form-group">
+                        <label>Posisi yang Dilamar *</label>
+                        <input type="text" id="position" required placeholder="Posisi / jabatan yang kamu inginkan">
+                    </div>
+                    <div class="form-group">
+                        <label>Status Lamaran *</label>
+                        <select id="status" required>
+                            <option value="wishlist">Wishlist - Tertarik melamar</option>
+                            <option value="applied" selected>Applied - Sudah kirim lamaran</option>
+                            <option value="interview">Interview - Dipanggil interview</option>
+                            <option value="offer">Offer - Dapat tawaran kerja! 🎉</option>
+                            <option value="rejected">Rejected - Belum beruntung</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Tanggal Melamar *</label>
+                        <input type="date" id="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Gaji yang Ditawarkan</label>
+                        <div class="salary-group">
+                            <select id="currency">
+                                <option value="IDR" selected>IDR (Rp)</option>
+                                <option value="USD">USD ($)</option>
+                                <option value="SGD">SGD (S$)</option>
+                                <option value="MYR">MYR (RM)</option>
+                                <option value="EUR">EUR (€)</option>
+                                <option value="GBP">GBP (£)</option>
+                            </select>
+                            <input type="text" id="salaryMin" placeholder="Gaji minimum (misal: 8.000.000)">
+                            <span class="salary-separator">-</span>
+                            <input type="text" id="salaryMax" placeholder="Gaji maksimum (misal: 12.000.000)">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Lokasi Kerja</label>
+                        <input type="text" id="location" placeholder="Kota / area tempat kerja">
+                    </div>
+                    <div class="form-group">
+                        <label>Platform Lamaran</label>
+                        <select id="platform">
+                            <option value="">Pilih platform (opsional)</option>
+                            <option value="LinkedIn">LinkedIn</option>
+                            <option value="JobStreet">JobStreet</option>
+                            <option value="Glints">Glints</option>
+                            <option value="Kalibrr">Kalibrr</option>
+                            <option value="Indeed">Indeed</option>
+                            <option value="Website Perusahaan">Website Perusahaan</option>
+                            <option value="Email Langsung">Email Langsung</option>
+                            <option value="Referral">Referral</option>
+                            <option value="Walk-in">Walk-in</option>
+                            <option value="Lainnya">Lainnya</option>
+                        </select>
+                    </div>
+                    <div class="form-group full">
+                        <label>Catatan Pribadi</label>
+                        <textarea id="notes" placeholder="Tulis catatan: sumber lowongan, contact person, tahapan seleksi, atau hal penting lainnya..."></textarea>
+                    </div>
+                </div>
+                <button type="submit" id="submitBtn">💾 Simpan Lamaran</button>
+                <button type="button" id="cancelBtn" style="display:none; background:linear-gradient(135deg, #64748b 0%, #475569 100%); margin-left:10px; margin-top:10px;">Batal</button>
+            </form>
+        </div>
+
+        <div class="export-import-section">
+            <h3>💾 Backup & Restore Data</h3>
+            <div class="export-import-buttons">
+                <button class="btn-export" onclick="exportData()">📥 Export Data</button>
+                <button class="btn-import" onclick="document.getElementById('importFile').click()">📤 Import Data</button>
+                <input type="file" id="importFile" accept=".json" onchange="importData(event)">
+            </div>
+        </div>
+
+        <div class="applications-list" id="applicationsList"></div>
+
+        </div>
+
+        <div id="checklist-tab" class="tab-content">
+            <div class="checklist-section">
+                <div class="checklist-header">
+                    <h2>✅ Checklist Persiapan Lamaran</h2>
+                    <p>Pastikan kamu sudah siap sebelum melamar kerja!</p>
+                </div>
+
+                <div class="checklist-category">
+                    <h3>📄 Dokumen</h3>
+                    <div class="checklist-items">
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check-cv">
+                            <label for="check-cv">CV/Resume terbaru dan sudah disesuaikan dengan posisi yang dilamar</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check-cover">
+                            <label for="check-cover">Cover letter yang dipersonalisasi untuk perusahaan target</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check-portfolio">
+                            <label for="check-portfolio">Portfolio/work samples (jika relevan dengan bidang kamu)</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check-certs">
+                            <label for="check-certs">Sertifikat, ijazah, dan dokumen pendukung lainnya</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check-references">
+                            <label for="check-references">Daftar referensi (jika diminta)</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="checklist-category">
+                    <h3>🌐 Online Presence</h3>
+                    <div class="checklist-items">
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check-linkedin">
+                            <label for="check-linkedin">LinkedIn profile sudah dioptimasi dan up-to-date</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check-photo">
+                            <label for="check-photo">Foto profil profesional di LinkedIn</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check-headline">
+                            <label for="check-headline">LinkedIn headline yang menarik dan jelas</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check-social">
+                            <label for="check-social">Social media sudah dibersihkan dari konten yang tidak profesional</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check-github">
+                            <label for="check-github">GitHub/portfolio online aktif (untuk tech roles)</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="checklist-category">
+                    <h3>🎯 Riset & Persiapan</h3>
+                    <div class="checklist-items">
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check-company">
+                            <label for="check-company">Riset tentang perusahaan (produk, kultur, recent news)</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check-jobdesc">
+                            <label for="check-jobdesc">Pahami job description dengan detail</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check-skills">
+                            <label for="check-skills">List skills dan pengalaman yang match dengan requirements</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check-questions">
+                            <label for="check-questions">Siapkan jawaban untuk pertanyaan interview umum</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check-stories">
+                            <label for="check-stories">Siapkan 3-5 achievement stories dengan metode STAR</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check-ask">
+                            <label for="check-ask">Siapkan pertanyaan untuk ditanyakan ke interviewer (min. 5 pertanyaan)</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="checklist-category">
+                    <h3>💼 Interview Day</h3>
+                    <div class="checklist-items">
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check-outfit">
+                            <label for="check-outfit">Pakaian interview sudah disiapkan dan sesuai dress code</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check-location">
+                            <label for="check-location">Lokasi interview sudah dicek (atau link Zoom sudah disimpan)</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check-time">
+                            <label for="check-time">Set reminder 1 jam sebelum interview</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check-docs-print">
+                            <label for="check-docs-print">Print CV dan dokumen penting (untuk offline interview)</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check-tech">
+                            <label for="check-tech">Test koneksi internet, kamera, dan mic (untuk virtual interview)</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check-background">
+                            <label for="check-background">Atur background dan lighting yang baik (untuk virtual interview)</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="checklist-category">
+                    <h3>📧 Follow Up</h3>
+                    <div class="checklist-items">
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check-thankyou">
+                            <label for="check-thankyou">Kirim thank you email dalam 24 jam setelah interview</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check-notes">
+                            <label for="check-notes">Catat hal-hal penting dari interview untuk review</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check-tracker">
+                            <label for="check-tracker">Update status di Job Application Tracker</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check-followup">
+                            <label for="check-followup">Set reminder untuk follow up (jika belum ada kabar 1-2 minggu)</label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="tips-tab" class="tab-content">
+            <div class="tips-section">
+                <div class="tips-header">
+                    <h2>💡 Tips & Tricks Lamaran Kerja</h2>
+                    <p>Panduan lengkap untuk sukses dalam proses melamar kerja dan interview</p>
+                </div>
+
+                <div class="tips-category">
+                    <h3>📝 Tips Membuat CV/Resume</h3>
+                    <div class="tips-list">
+                        <div class="tip-item">
+                            <h4>Format yang Rapi dan Profesional</h4>
+                            <p>Gunakan format yang bersih, mudah dibaca, dan maksimal 2 halaman. Pilih jenis huruf profesional seperti Arial, Calibri, atau Times New Roman dengan ukuran 10-12pt.</p>
+                        </div>
+                        <div class="tip-item">
+                            <h4>Sesuaikan dengan Posisi yang Dilamar</h4>
+                            <p>Jangan pakai CV yang sama untuk semua lamaran. Tonjolkan pengalaman dan keahlian yang relevan dengan deskripsi pekerjaan. Gunakan kata kunci dari lowongan.</p>
+                        </div>
+                        <div class="tip-item">
+                            <h4>Tunjukkan Achievement, Bukan Hanya Job Desc</h4>
+                            <p>Jangan cuma list tugas kamu. Tunjukkan hasil kerja dengan angka konkret. Contoh: "Meningkatkan penjualan 30% dalam 6 bulan" lebih powerful daripada "Bertanggung jawab atas penjualan".</p>
+                            <p style="margin-top: 10px;"><strong>Kalau belum bisa kasih angka?</strong> Fokus ke dampak dan cakupan kerja:</p>
+                            <ul style="margin-top: 8px;">
+                                <li>"Memimpin tim 5 orang untuk mendesain ulang website perusahaan"</li>
+                                <li>"Mengelola proyek dari perencanaan hingga peluncuran dalam 3 bulan"</li>
+                                <li>"Menerapkan sistem baru yang mempercepat proses kerja tim"</li>
+                                <li>"Berhasil menyelesaikan proyek tepat waktu meskipun dengan sumber daya terbatas"</li>
+                                <li>"Menciptakan SOP baru yang diadopsi oleh seluruh departemen"</li>
+                            </ul>
+                            <p style="margin-top: 10px;">Intinya: tunjukkan <strong>dampak</strong> yang kamu buat, bukan cuma <strong>aktivitas</strong> yang kamu lakukan!</p>
+                        </div>
+                        <div class="tip-item">
+                            <h4>Kata Kerja yang Kuat</h4>
+                            <p>Mulai kalimat dengan kata kerja yang kuat seperti: Memimpin, Mengembangkan, Meningkatkan, Menganalisis, Merancang, Mengelola, Menciptakan, Mengimplementasikan.</p>
+                        </div>
+                        <div class="tip-item">
+                            <h4>Cek Kesalahan Ketik dan Tata Bahasa</h4>
+                            <p>Kesalahan ketik di CV bisa memberi kesan kurang teliti, padahal isinya mungkin bagus. Karena itu, ada baiknya minta teman atau keluarga ikut mengecek sebelum dikirim. Setelah itu, gunakan juga alat bantu seperti Grammarly untuk memastikan tidak ada yang terlewat.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tips-category">
+                    <h3>✉️ Tips Surat Lamaran</h3>
+                    <div class="tips-list">
+                        <div class="tip-item">
+                            <h4>Personalisasi untuk Setiap Perusahaan</h4>
+                            <p>Riset tentang perusahaan dan posisi yang kamu lamar. Sebutkan kenapa kamu tertarik dengan perusahaan tersebut secara spesifik.</p>
+                        </div>
+                        <div class="tip-item">
+                            <h4>Struktur yang Jelas</h4>
+                            <ul>
+                                <li><strong>Pembukaan:</strong> Posisi yang dilamar dan dari mana kamu tahu lowongan ini</li>
+                                <li><strong>Isi:</strong> Pengalaman dan keahlian yang relevan, pencapaian konkret</li>
+                                <li><strong>Penutup:</strong> Antusiasme untuk wawancara dan terima kasih</li>
+                            </ul>
+                        </div>
+                        <div class="tip-item">
+                            <h4>Tunjukkan Nilai yang Bisa Kamu Berikan</h4>
+                            <p>Fokus ke "apa yang bisa kamu lakukan untuk perusahaan" bukan cuma "apa yang kamu inginkan". Tunjukkan manfaat kamu bagi mereka!</p>
+                        </div>
+                        <div class="tip-item">
+                            <h4>Maksimal 1 Halaman</h4>
+                            <p>Perekrut biasanya menangani banyak lamaran sekaligus, jadi waktu mereka terbatas. Usahakan surat lamaran tetap ringkas, tetapi tetap terasa kuat dan jelas pesannya. 3-4 paragraf umumnya sudah cukup untuk menyampaikan poin utama tanpa bertele-tele.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tips-category">
+                    <h3>🎯 Tips Melamar Kerja</h3>
+                    <div class="tips-list">
+                        <div class="tip-item">
+                            <h4>Lamar Sedini Mungkin</h4>
+                            <p>Jangan tunggu batas waktu! Banyak perusahaan mereview aplikasi berdasarkan siapa yang melamar duluan. Lamar di hari pertama atau kedua lowongan dibuka.</p>
+                        </div>
+                        <div class="tip-item">
+                            <h4>Ikuti Instruksi dengan Teliti</h4>
+                            <p>Baca posting lowongan dengan detail. Kalau diminta kirim dengan subjek tertentu atau format file khusus, IKUTI! Ini tes pertama apakah kamu teliti.</p>
+                        </div>
+                        <div class="tip-item">
+                            <h4>Manfaatkan Jaringan Pertemanan</h4>
+                            <p>Banyak posisi terisi lewat jalur referensi, jadi relasi sering kali berperan besar. Coba bangun koneksi dengan orang-orang di perusahaan yang kamu incar melalui LinkedIn. Dari sana, kamu bisa mencari referensi atau setidaknya mendapatkan gambaran dan informasi dari orang dalam.</p>
+                        </div>
+                        <div class="tip-item">
+                            <h4>Tindak Lanjut (Tapi Jangan Spam)</h4>
+                            <p>Tunggu 1-2 minggu setelah melamar, baru tindak lanjut dengan email yang sopan. Tunjukkan antusiasme tapi tetap profesional.</p>
+                        </div>
+                        <div class="tip-item">
+                            <h4>Catat Semua Lamaran Kamu</h4>
+                            <p>Gunakan aplikasi ini! Catat tanggal melamar, status, kontak person. Ini bantu kamu tetap terorganisir dan tahu kapan harus menindaklanjuti.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tips-category">
+                    <h3>🌍 Bahasa Inggris untuk Mencari Kerja</h3>
+                    <div class="tips-list">
+                        <div class="tip-item">
+                            <h4>Kenapa Bahasa Inggris Penting?</h4>
+                            <p>Bahasa Inggris dasar akan sangat membantu proses mencari kerja kamu, bahkan untuk posisi yang tidak membutuhkan Bahasa Inggris:</p>
+                            <ul>
+                                <li>Banyak lowongan kerja (terutama di perusahaan multinasional) ditulis dalam Bahasa Inggris</li>
+                                <li>Format CV internasional lebih umum digunakan</li>
+                                <li>Wawancara kadang menyertakan pertanyaan dalam Bahasa Inggris</li>
+                                <li>Akses ke sumber belajar dan panduan mencari kerja yang lebih banyak</li>
+                                <li>Membuka peluang kerja jarak jauh untuk perusahaan luar negeri</li>
+                            </ul>
+                        </div>
+                        <div class="tip-item">
+                            <h4>Yang Perlu Dikuasai (Level Dasar)</h4>
+                            <p>Kamu tidak perlu lancar! Yang penting bisa:</p>
+                            <ul>
+                                <li><strong>Membaca:</strong> Pahami deskripsi pekerjaan, persyaratan, dan profil perusahaan</li>
+                                <li><strong>Menulis:</strong> Bikin CV dan surat lamaran dalam Bahasa Inggris (walau sederhana)</li>
+                                <li><strong>Berbicara:</strong> Perkenalan diri, jelaskan pengalaman kerja, dan jawab pertanyaan dasar</li>
+                                <li><strong>Kosakata:</strong> Istilah-istilah umum di bidang kamu dan dunia kerja</li>
+                            </ul>
+                        </div>
+                        <div class="tip-item">
+                            <h4>Tips Belajar Bahasa Inggris untuk Mencari Kerja</h4>
+                            <ul>
+                                <li><strong>Baca posting lowongan dalam Bahasa Inggris:</strong> Ini cara paling praktis belajar kosakata yang relevan</li>
+                                <li><strong>Bikin CV versi Bahasa Inggris:</strong> Terjemahkan CV kamu (bisa pakai bantuan ChatGPT/Google Translate, tapi tinjau lagi)</li>
+                                <li><strong>Latihan perkenalan diri:</strong> "Ceritakan tentang diri kamu" dalam 2-3 menit</li>
+                                <li><strong>Nonton video tips wawancara di YouTube:</strong> Dapat kosakata dan cara menjawab sekaligus</li>
+                                <li><strong>Ikut komunitas online:</strong> Grup LinkedIn, Discord, atau forum di bidang kamu</li>
+                                <li><strong>Latihan dengan kecerdasan buatan:</strong> Ngobrol dengan ChatGPT untuk latihan wawancara</li>
+                            </ul>
+                        </div>
+                        <div class="tip-item">
+                            <h4>Jangan Takut Tata Bahasanya Kurang Sempurna!</h4>
+                            <p>Yang terpenting: <strong>komunikatif dan jelas</strong>. Penutur asli pun sering tata bahasanya tidak sempurna dalam percakapan. Fokus ke:</p>
+                            <ul>
+                                <li>Sampaikan pesan dengan jelas</li>
+                                <li>Percaya diri waktu berbicara (walaupun ada kesalahan)</li>
+                                <li>Terus belajar dari masukan</li>
+                            </ul>
+                            <p style="margin-top: 10px;">Ingat: "Selesai lebih baik daripada sempurna". Mulai dari sekarang dengan Bahasa Inggris seadanya, nanti akan meningkat seiring waktu!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tips-category">
+                    <h3>🎤 Tips Wawancara Kerja</h3>
+                    <div class="tips-list">
+                        <div class="tip-item">
+                            <h4>Persiapan adalah Kunci</h4>
+                            <ul>
+                                <li>Riset perusahaan: produk, budaya, berita terbaru</li>
+                                <li>Pahami deskripsi pekerjaan dengan detail</li>
+                                <li>Siapkan jawaban untuk pertanyaan umum (kelebihan/kekurangan, kenapa tertarik, dll)</li>
+                                <li>Siapkan pertanyaan untuk pewawancara (minimal 3-5 pertanyaan)</li>
+                            </ul>
+                        </div>
+                        <div class="tip-item">
+                            <h4>Metode STAR untuk Pertanyaan Behavioral</h4>
+                            <p>Jawab dengan struktur STAR:</p>
+                            <ul>
+                                <li><strong>S</strong>ituation: Jelaskan konteks/situasi</li>
+                                <li><strong>T</strong>ask Apa tanggung jawab kamu</li>
+                                <li><strong>A</strong>ction: Apa yang kamu lakukan</li>
+                                <li><strong>R</strong>esult: Hasilnya apa, kalau bisa dengan angka</li>
+                            </ul>
+                        </div>
+                        <div class="tip-item">
+                            <h4>Kode Berpakaian dan Penampilan</h4>
+                            <p>Lebih baik berpakaian terlalu formal daripada terlalu kasual. Kalau tidak yakin, tanya HRD. Pastikan pakaian bersih, rapi, dan profesional. Kesan pertama sangat penting!</p>
+                        </div>
+                        <div class="tip-item">
+                            <h4>Bahasa Tubuh yang Positif</h4>
+                            <ul>
+                                <li>Kontak mata: Tunjukkan kepercayaan diri</li>
+                                <li>Senyum: Ramah dan mudah didekati</li>
+                                <li>Postur tegak: Jangan bungkuk</li>
+                                <li>Jabat tangan yang tegas (untuk wawancara tatap muka)</li>
+                            </ul>
+                        </div>
+                        <div class="tip-item">
+                            <h4>Untuk Wawancara Virtual</h4>
+                            <ul>
+                                <li>Tes koneksi internet dan perangkat sehari sebelumnya</li>
+                                <li>Pilih latar belakang yang rapi dan pencahayaan yang baik</li>
+                                <li>Tatap kamera, bukan layar (meniru kontak mata)</li>
+                                <li>Kurangi gangguan dan notifikasi</li>
+                                <li>Berpakaian profesional dari atas sampai bawah</li>
+                            </ul>
+                        </div>
+                        <div class="tip-item">
+                            <h4>Pertanyaan yang Bisa Kamu Tanyakan</h4>
+                            <ul>
+                                <li>"Seperti apa hari-hari biasa di posisi ini?"</li>
+                                <li>"Apa tantangan terbesar yang akan dihadapi di peran ini?"</li>
+                                <li>"Bagaimana budaya tim dan cara kerja sehari-hari?"</li>
+                                <li>"Apa langkah selanjutnya dalam proses rekrutmen ini?"</li>
+                                <li>"Apa yang membuat Anda (pewawancara) senang bekerja di sini?"</li>
+                            </ul>
+                        </div>
+                        <div class="tip-item">
+                            <h4>Setelah Wawancara: Email Terima Kasih</h4>
+                            <p>Kirim email terima kasih dalam 24 jam. Sampaikan rasa terima kasih, tegaskan kembali minat kamu, dan sebutkan 1-2 hal spesifik dari wawancara yang berkesan.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tips-category">
+                    <h3>💼 Optimasi LinkedIn agar Dilirik Perekrut</h3>
+                    <div class="tips-list">
+                        <div class="tip-item">
+                            <h4>Kenapa LinkedIn Penting?</h4>
+                            <p>LinkedIn adalah tempat pertama pencari talenta dan perekrut mencari kandidat. Profil LinkedIn yang optimal bisa membuat kamu dihubungi untuk peluang kerja tanpa perlu melamar!</p>
+                        </div>
+                        <div class="tip-item">
+                            <h4>Foto Profil yang Profesional</h4>
+                            <ul>
+                                <li>Pakai foto dekat, fokus ke wajah (bukan foto seluruh tubuh)</li>
+                                <li>Latar belakang sederhana dan terang</li>
+                                <li>Senyum dan tatap mata ke kamera</li>
+                                <li>Pakaian profesional (sesuai industri kamu)</li>
+                                <li>Hindari: foto selfie, foto dengan orang lain, foto liburan</li>
+                            </ul>
+                        </div>
+                        <div class="tip-item">
+                            <h4>Judul yang Menarik Perhatian</h4>
+                            <p>Jangan cuma tulis "Mencari peluang kerja". Buat judul yang menunjukkan nilai:</p>
+                            <ul>
+                                <li><strong>Buruk:</strong> "Lulusan Baru | Mencari Pekerjaan"</li>
+                                <li><strong>Bagus:</strong> "Lulusan Marketing | Pembuat Konten | Passionate tentang Strategi Digital"</li>
+                                <li><strong>Lebih Baik:</strong> "Spesialis Marketing Digital | Membantu 10+ Brand Berkembang di Media Sosial 50% | Terbuka untuk Peluang"</li>
+                            </ul>
+                            <p style="margin-top: 10px;">Gunakan kata kunci yang sering dicari perekrut di bidang kamu!</p>
+                        </div>
+                        <div class="tip-item">
+                            <h4>Bagian Ringkasan/Tentang yang Menarik</h4>
+                            <p>Ini kesempatan kamu untuk "bercerita". Sertakan:</p>
+                            <ul>
+                                <li>Siapa kamu dan apa yang kamu lakukan</li>
+                                <li>Passion dan motivasi kamu</li>
+                                <li>Pencapaian utama (dengan angka kalau bisa)</li>
+                                <li>Keahlian dan expertise utama</li>
+                                <li>Apa yang kamu cari / tujuan karir</li>
+                                <li>Ajakan bertindak (misal: "Jangan ragu untuk menghubungi saya untuk kolaborasi")</li>
+                            </ul>
+                            <p style="margin-top: 10px;">Tulis dalam sudut pandang orang pertama ("Saya" bukan "Dia") supaya lebih personal!</p>
+                        </div>
+                        <div class="tip-item">
+                            <h4>Bagian Pengalaman: Detail itu Penting</h4>
+                            <ul>
+                                <li>Jangan cuma list judul pekerjaan dan perusahaan</li>
+                                <li>Tulis 3-5 poin per peran tentang pencapaian dan tanggung jawab</li>
+                                <li>Gunakan kata kerja aktif (Memimpin, Mengembangkan, Meningkatkan, Mengelola)</li>
+                                <li>Sertakan hasil/dampak dengan angka konkret</li>
+                                <li>Tambah media: foto, video, dokumen, atau link ke proyek kamu</li>
+                            </ul>
+                        </div>
+                        <div class="tip-item">
+                            <h4>Bagian Keahlian dengan Endorsement</h4>
+                            <ul>
+                                <li>Tambahkan minimal 10-15 keahlian yang relevan dengan tujuan karir kamu</li>
+                                <li>Prioritaskan 3 keahlian utama (yang paling penting di atas)</li>
+                                <li>Sertakan campuran keahlian teknis dan soft skill</li>
+                                <li>Minta dukungan dari rekan kerja, atasan, atau teman</li>
+                                <li>Ikuti Asesmen Keahlian LinkedIn untuk memvalidasi keahlian kamu</li>
+                            </ul>
+                        </div>
+                        <div class="tip-item">
+                            <h4>Rekomendasi itu Penting!</h4>
+                            <p>Rekomendasi dari atasan atau rekan kerja adalah bukti sosial yang kuat. Tips:</p>
+                            <ul>
+                                <li>Minta rekomendasi dari 2-3 orang (mantan atasan, rekan kerja, atau klien)</li>
+                                <li>Spesifik lebih baik: minta mereka ceritakan proyek/pencapaian konkret</li>
+                                <li>Beri rekomendasi untuk menerima: bantu orang lain dulu!</li>
+                            </ul>
+                        </div>
+                        <div class="tip-item">
+                            <h4>Set Profil ke "Terbuka untuk Pekerjaan"</h4>
+                            <ul>
+                                <li>Aktifkan fitur "Terbuka untuk Pekerjaan" (bisa privat atau publik)</li>
+                                <li>Tentukan judul pekerjaan, lokasi, dan jenis pekerjaan yang kamu cari</li>
+                                <li>Ini sinyal ke perekrut bahwa kamu tersedia dan tertarik</li>
+                            </ul>
+                        </div>
+                        <div class="tip-item">
+                            <h4>Aktif: Posting & Berinteraksi!</h4>
+                            <p>Algoritma LinkedIn menyukai pengguna yang aktif. Cara mudah:</p>
+                            <ul>
+                                <li>Bagikan artikel atau wawasan tentang industri kamu (1-2x seminggu)</li>
+                                <li>Komentar pada postingan dari orang di jaringan kamu</li>
+                                <li>Beri reaksi (suka/rayakan) ke pencapaian orang lain</li>
+                                <li>Bagikan kemenangan dan pembelajaran kamu sendiri</li>
+                                <li>Ikut grup LinkedIn di bidang kamu dan berpartisipasi</li>
+                            </ul>
+                            <p style="margin-top: 10px;">Konsistensi lebih penting dari frekuensi. Lebih baik posting 1x per minggu konsisten daripada 10 postingan sekaligus terus hilang!</p>
+                        </div>
+                        <div class="tip-item">
+                            <h4>Membangun Jaringan Secara Strategis</h4>
+                            <ul>
+                                <li>Terhubung dengan koneksi tingkat kedua (teman dari teman)</li>
+                                <li>Tambahkan perekrut di perusahaan target kamu</li>
+                                <li>Terhubung dengan alumni dari sekolah/universitas kamu</li>
+                                <li>Personalisasi permintaan koneksi (jangan generik "Saya ingin terhubung")</li>
+                                <li>Ikuti perusahaan yang kamu minati</li>
+                            </ul>
+                        </div>
+                        <div class="tip-item">
+                            <h4>Kata Kunci untuk Pencarian Perekrut</h4>
+                            <p>Taburkan kata kunci di seluruh profil kamu:</p>
+                            <ul>
+                                <li>Judul pekerjaan yang kamu targetkan (misal: "Manajer Produk", "Analis Data")</li>
+                                <li>Keahlian teknis (misal: "Python", "Google Analytics", "Figma")</li>
+                                <li>Istilah industri (misal: "SaaS", "E-commerce", "Fintech")</li>
+                                <li>Sertifikasi (misal: "Bersertifikat PMP", "Bersertifikat Google Ads")</li>
+                            </ul>
+                            <p style="margin-top: 10px;">Tips: Cek posting lowongan yang kamu minati, lihat kata kunci apa yang sering muncul!</p>
+                        </div>
+                        <div class="tip-item">
+                            <h4>Update Secara Teratur</h4>
+                            <p>Profil yang tidak pernah diupdate kurang menarik. Update minimal:</p>
+                            <ul>
+                                <li>Setiap dapat pencapaian baru</li>
+                                <li>Setiap selesaikan proyek penting</li>
+                                <li>Setiap dapat keahlian atau sertifikasi baru</li>
+                                <li>Minimal 1x per bulan (walau cuma update kecil)</li>
+                            </ul>
+                            <p style="margin-top: 10px;">Setiap kali kamu update, profil kamu muncul di umpan jaringan kamu = visibilitas gratis!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tips-category">
+                    <h3>⚠️ Hal yang Harus Dihindari</h3>
+                    <div class="tips-list">
+                        <div class="tip-item">
+                            <h4>Jangan Bicara Buruk tentang Perusahaan Sebelumnya</h4>
+                            <p>Meskipun pengalaman buruk, tetap profesional. Fokus ke "kesempatan belajar" atau "mencari tantangan baru" bukan menjelek-jelekkan.</p>
+                        </div>
+                        <div class="tip-item">
+                            <h4>Jangan Fokus Cuma ke Gaji di Awal</h4>
+                            <p>Pertanyaan pertama jangan soal gaji atau tunjangan. Tunjukkan dulu minat ke peran dan perusahaan. Tunggu mereka yang buka topik kompensasi.</p>
+                        </div>
+                        <div class="tip-item">
+                            <h4>Jangan Datang Tanpa Persiapan</h4>
+                            <p>"Saya tidak tahu tentang perusahaan ini" = penolakan langsung. Lakukan riset!</p>
+                        </div>
+                        <div class="tip-item">
+                            <h4>Jangan Berbohong atau Melebih-lebihkan</h4>
+                            <p>Keahlian yang kamu klaim harus bisa kamu buktikan. Pemeriksaan latar belakang itu nyata. Kejujuran adalah kebijakan terbaik.</p>
+                        </div>
+                        <div class="tip-item">
+                            <h4>Jangan Terlambat</h4>
+                            <p>Untuk wawancara tatap muka, datang 10-15 menit lebih awal. Untuk online, bergabung 5 menit sebelum waktu yang dijadwalkan. Terlambat = tidak menghargai waktu orang lain.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tips-category">
+                    <h3>💪 Mindset untuk Mencari Kerja</h3>
+                    <div class="tips-list">
+                        <div class="tip-item">
+                            <h4>Penolakan itu Normal</h4>
+                            <p>Rata-rata orang butuh 100-200 aplikasi untuk dapat 1 tawaran. Setiap "tidak" membawa kamu lebih dekat ke "ya". Jangan ambil hati!</p>
+                        </div>
+                        <div class="tip-item">
+                            <h4>Konsisten dan Disiplin</h4>
+                            <p>Tetapkan target harian: misalnya 5 aplikasi per hari. Perlakukan mencari kerja seperti pekerjaan penuh waktu. Konsistensi adalah kunci!</p>
+                        </div>
+                        <div class="tip-item">
+                            <h4>Merawat Diri Tetap Penting</h4>
+                            <p>Mencari kerja itu melelahkan secara mental. Jangan lupa istirahat, olahraga, dan waktu untuk diri sendiri. Kelelahan tidak akan membantu proses kamu.</p>
+                        </div>
+                        <div class="tip-item">
+                            <h4>Belajar dari Setiap Wawancara</h4>
+                            <p>Setelah wawancara, tulis catatan tentang pertanyaan yang ditanya dan gimana kamu jawab. Identifikasi area perbaikan untuk wawancara berikutnya.</p>
+                        </div>
+                        <div class="tip-item">
+                            <h4>Waktu yang Tepat akan Datang</h4>
+                            <p>Kadang bukan tentang kamu, tapi tentang waktu. Perusahaan bisa membekukan perekrutan, atau ada kandidat internal. Terus lanjutkan, peluang kamu akan datang!</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let applications = JSON.parse(localStorage.getItem('jobApplications')) || [];
+        let editingId = null;
+
+        const form = document.getElementById('jobForm');
+        const appsList = document.getElementById('applicationsList');
+        const submitBtn = document.getElementById('submitBtn');
+        const cancelBtn = document.getElementById('cancelBtn');
+        const formTitle = document.getElementById('form-title');
+
+        // Set default date to today
+        document.getElementById('date').valueAsDate = new Date();
+
+        // Auto format salary input with dots for both min and max
+        const salaryMinInput = document.getElementById('salaryMin');
+        const salaryMaxInput = document.getElementById('salaryMax');
+        
+        function formatSalary(input) {
+            input.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value) {
+                    value = value.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+                }
+                e.target.value = value;
+            });
+        }
+        
+        formatSalary(salaryMinInput);
+        formatSalary(salaryMaxInput);
+
+        // Export data
+        function exportData() {
+            if (applications.length === 0) {
+                alert('Belum ada data untuk di-export!');
+                return;
+            }
+
+            const dataStr = JSON.stringify(applications, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `job-applications-${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+            
+            alert('✅ Data berhasil di-export!');
+        }
+
+        // Import data
+        function importData(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const importedData = JSON.parse(e.target.result);
+                    
+                    if (!Array.isArray(importedData)) {
+                        alert('❌ Format file tidak valid!');
+                        return;
+                    }
+
+                    const confirmed = confirm(`Import ${importedData.length} data lamaran?\n\nPeringatan: Data yang ada sekarang akan ditimpa!`);
+                    
+                    if (confirmed) {
+                        applications = importedData;
+                        saveToLocalStorage();
+                        renderApplications();
+                        alert('✅ Data berhasil di-import!');
+                    }
+                } catch (error) {
+                    alert('❌ Gagal membaca file! Pastikan file berformat JSON yang valid.');
+                }
+            };
+            reader.readAsText(file);
+            event.target.value = '';
+        }
+
+        const motivationalQuotes = [
+            "Setiap 'tidak' membawa kamu lebih dekat ke 'ya' yang tepat! 💪",
+            "Kesuksesan adalah hasil dari persiapan, kerja keras, dan belajar dari kegagalan.",
+            "Karir impian kamu sedang menunggu. Jangan menyerah!",
+            "Proses mencari kerja adalah investasi untuk masa depan yang lebih baik.",
+            "Tetap semangat! Pekerjaan terbaik kamu belum datang.",
+            "Setiap rejection adalah redirecting ke tempat yang lebih baik! 🚀",
+            "Percaya diri dengan skill kamu. Terus coba dan jangan takut gagal!",
+            "Kamu lebih dekat dengan tawaran kerja dari yang kamu kira. Keep going!"
+        ];
+
+        function getRandomMotivation() {
+            return motivationalQuotes[Math.floor(Math.random() * motivationalQuotes.length)];
+        }
+
+        function updateStats() {
+            document.getElementById('stat-total').textContent = applications.length;
+            document.getElementById('stat-applied').textContent = applications.filter(a => a.status === 'applied').length;
+            document.getElementById('stat-interview').textContent = applications.filter(a => a.status === 'interview').length;
+            document.getElementById('stat-offer').textContent = applications.filter(a => a.status === 'offer').length;
+        }
+
+        const statusLabels = {
+            applied: 'Applied',
+            interview: 'Interview',
+            offer: 'Offer',
+            rejected: 'Rejected',
+            wishlist: 'Wishlist'
+        };
+
+        const currencySymbols = {
+            IDR: 'Rp',
+            USD: '$',
+            SGD: 'S$',
+            MYR: 'RM',
+            EUR: '€',
+            GBP: '£'
+        };
+
+        function renderApplications() {
+            if (applications.length === 0) {
+                appsList.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">🎯</div>
+                        <p style="font-size: 18px; font-weight: 600; color: #1e293b;">Yuk, mulai perjalanan karir kamu!</p>
+                        <div class="empty-state-motivation">
+                            <p>${getRandomMotivation()}</p>
+                        </div>
+                        <p>Belum ada lamaran yang tercatat. Tambahkan lamaran pertama kamu dan mulai tracking prosesnya!</p>
+                        <div style="margin-top: 20px;">
+                            <span class="cta-button" onclick="document.getElementById('company').focus()">
+                                ✨ Tambah Lamaran Pertama
+                            </span>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+
+            appsList.innerHTML = applications.map(app => `
+                <div class="app-card">
+                    <div class="app-header">
+                        <div class="app-title">
+                            <div class="company">${app.company}</div>
+                            <div class="position">${app.position}</div>
+                        </div>
+                        <span class="status-badge status-${app.status}">${statusLabels[app.status]}</span>
+                    </div>
+                    <div class="app-details">
+                        <div class="detail-item">
+                            <span class="detail-label">📅 Tanggal:</span>
+                            ${new Date(app.date).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}
+                        </div>
+                        ${app.salary ? `
+                            <div class="detail-item">
+                                <span class="detail-label">💰 Gaji:</span>
+                                ${app.currency ? currencySymbols[app.currency] : 'Rp'} ${app.salary}
+                            </div>
+                        ` : ''}
+                        ${app.location ? `
+                            <div class="detail-item">
+                                <span class="detail-label">📍 Lokasi:</span>
+                                ${app.location}
+                            </div>
+                        ` : ''}
+                        ${app.platform ? `
+                            <div class="detail-item">
+                                <span class="detail-label">🌐 Platform:</span>
+                                ${app.platform}
+                            </div>
+                        ` : ''}
+                    </div>
+                    ${app.notes ? `<div class="app-notes">📝 ${app.notes}</div>` : ''}
+                    <div class="app-actions">
+                        <button class="btn-edit" onclick="editApplication(${app.id})">✏️ Edit</button>
+                        <button class="btn-delete" onclick="deleteApplication(${app.id})">🗑️ Hapus</button>
+                    </div>
+                </div>
+            `).join('');
+
+            updateStats();
+        }
+
+        function saveToLocalStorage() {
+            localStorage.setItem('jobApplications', JSON.stringify(applications));
+        }
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const salaryMin = document.getElementById('salaryMin').value;
+            const salaryMax = document.getElementById('salaryMax').value;
+            let salaryDisplay = '';
+            
+            if (salaryMin && salaryMax) {
+                salaryDisplay = `${salaryMin} - ${salaryMax}`;
+            } else if (salaryMin) {
+                salaryDisplay = salaryMin;
+            } else if (salaryMax) {
+                salaryDisplay = `Up to ${salaryMax}`;
+            }
+            
+            const formData = {
+                company: document.getElementById('company').value,
+                position: document.getElementById('position').value,
+                status: document.getElementById('status').value,
+                date: document.getElementById('date').value,
+                currency: document.getElementById('currency').value,
+                salary: salaryDisplay,
+                location: document.getElementById('location').value,
+                platform: document.getElementById('platform').value,
+                notes: document.getElementById('notes').value
+            };
+
+            if (editingId !== null) {
+                applications = applications.map(app => 
+                    app.id === editingId ? { ...formData, id: editingId } : app
+                );
+                editingId = null;
+                submitBtn.textContent = '💾 Simpan Lamaran';
+                cancelBtn.style.display = 'none';
+                formTitle.textContent = '✨ Tambah Lamaran Baru';
+            } else {
+                applications.push({ ...formData, id: Date.now() });
+            }
+
+            saveToLocalStorage();
+            renderApplications();
+            form.reset();
+            document.getElementById('date').valueAsDate = new Date();
+            document.getElementById('currency').value = 'IDR';
+            
+            setTimeout(() => {
+                window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+            }, 100);
+        });
+
+        cancelBtn.addEventListener('click', () => {
+            editingId = null;
+            form.reset();
+            document.getElementById('date').valueAsDate = new Date();
+            document.getElementById('currency').value = 'IDR';
+            submitBtn.textContent = '💾 Simpan Lamaran';
+            cancelBtn.style.display = 'none';
+            formTitle.textContent = '✨ Tambah Lamaran Baru';
+        });
+
+        function editApplication(id) {
+            const app = applications.find(a => a.id === id);
+            if (!app) return;
+
+            document.getElementById('company').value = app.company;
+            document.getElementById('position').value = app.position;
+            document.getElementById('status').value = app.status;
+            document.getElementById('date').value = app.date;
+            document.getElementById('currency').value = app.currency || 'IDR';
+            
+            // Split salary if it contains " - "
+            if (app.salary) {
+                if (app.salary.includes(' - ')) {
+                    const salaryParts = app.salary.split(' - ');
+                    document.getElementById('salaryMin').value = salaryParts[0] || '';
+                    document.getElementById('salaryMax').value = salaryParts[1] || '';
+                } else if (app.salary.startsWith('Up to ')) {
+                    document.getElementById('salaryMin').value = '';
+                    document.getElementById('salaryMax').value = app.salary.replace('Up to ', '');
+                } else {
+                    document.getElementById('salaryMin').value = app.salary;
+                    document.getElementById('salaryMax').value = '';
+                }
+            } else {
+                document.getElementById('salaryMin').value = '';
+                document.getElementById('salaryMax').value = '';
+            }
+            
+            document.getElementById('location').value = app.location || '';
+            document.getElementById('platform').value = app.platform || '';
+            document.getElementById('notes').value = app.notes || '';
+
+            editingId = id;
+            submitBtn.textContent = '💾 Simpan Perubahan';
+            cancelBtn.style.display = 'inline-block';
+            formTitle.textContent = '✏️ Edit Lamaran';
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function deleteApplication(id) {
+            if (confirm('Yakin ingin menghapus lamaran ini?')) {
+                applications = applications.filter(a => a.id !== id);
+                saveToLocalStorage();
+                renderApplications();
+            }
+        }
+
+        // Initial render
+        renderApplications();
+
+        // Tab switching
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remove active from all nav tabs
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab
+            if (tabName === 'tracker') {
+                document.getElementById('tracker-tab').classList.add('active');
+                document.querySelectorAll('.nav-tab')[0].classList.add('active');
+            } else if (tabName === 'checklist') {
+                document.getElementById('checklist-tab').classList.add('active');
+                document.querySelectorAll('.nav-tab')[1].classList.add('active');
+            } else if (tabName === 'tips') {
+                document.getElementById('tips-tab').classList.add('active');
+                document.querySelectorAll('.nav-tab')[2].classList.add('active');
+            }
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
