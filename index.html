@@ -311,6 +311,171 @@
             color: #94a3b8;
         }
 
+        .filter-controls {
+            background: white;
+            padding: 25px 30px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(33, 156, 145, 0.08);
+            border: 2px solid #e0f7f4;
+        }
+
+        .filter-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr auto;
+            gap: 15px;
+            margin-bottom: 15px;
+            align-items: end;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .filter-group label {
+            font-size: 13px;
+            margin-bottom: 6px;
+            color: #64748b;
+            font-weight: 600;
+        }
+
+        .date-range {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .date-separator {
+            text-align: center;
+            color: #64748b;
+            font-size: 13px;
+            padding-bottom: 4px;
+        }
+
+        .btn-filter {
+            background: linear-gradient(135deg, #219c91 0%, #1a8078 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .btn-filter:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(33, 156, 145, 0.3);
+        }
+
+        .btn-reset {
+            background: white;
+            color: #64748b;
+            border: 2px solid #e2e8f0;
+            padding: 10px 20px;
+        }
+
+        .btn-reset:hover {
+            background: #f8fafc;
+            border-color: #cbd5e1;
+        }
+
+        .results-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(33, 156, 145, 0.06);
+        }
+
+        .results-count {
+            color: #1e293b;
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .results-controls {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .per-page-selector {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .per-page-selector label {
+            color: #64748b;
+            font-size: 14px;
+            font-weight: 500;
+            margin: 0;
+        }
+
+        .per-page-selector select {
+            padding: 6px 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            background: white;
+            cursor: pointer;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin-top: 25px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(33, 156, 145, 0.06);
+        }
+
+        .pagination button {
+            padding: 8px 16px;
+            background: white;
+            color: #64748b;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .pagination button:hover:not(:disabled) {
+            background: #219c91;
+            color: white;
+            border-color: #219c91;
+        }
+
+        .pagination button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .pagination button.active {
+            background: #219c91;
+            color: white;
+            border-color: #219c91;
+        }
+
+        .pagination-info {
+            color: #64748b;
+            font-size: 14px;
+            margin: 0 10px;
+        }
+
         .stats {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -660,6 +825,127 @@
             display: none;
         }
 
+        /* Toast Notification */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 400px;
+        }
+
+        .toast {
+            background: white;
+            padding: 16px 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: slideIn 0.3s ease-out;
+            border-left: 4px solid #219c91;
+            min-width: 300px;
+        }
+
+        .toast.success {
+            border-left-color: #10b981;
+        }
+
+        .toast.error {
+            border-left-color: #ef4444;
+        }
+
+        .toast.info {
+            border-left-color: #3b82f6;
+        }
+
+        .toast.warning {
+            border-left-color: #f59e0b;
+        }
+
+        .toast-icon {
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .toast-content {
+            flex: 1;
+        }
+
+        .toast-title {
+            font-weight: 700;
+            font-size: 15px;
+            color: #1e293b;
+            margin-bottom: 2px;
+        }
+
+        .toast-message {
+            font-size: 14px;
+            color: #64748b;
+            line-height: 1.4;
+        }
+
+        .toast-close {
+            background: none;
+            border: none;
+            color: #94a3b8;
+            cursor: pointer;
+            padding: 4px;
+            font-size: 20px;
+            line-height: 1;
+            transition: color 0.2s;
+            margin: 0;
+            box-shadow: none;
+        }
+
+        .toast-close:hover {
+            color: #64748b;
+            transform: none;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+        }
+
+        .toast.removing {
+            animation: slideOut 0.3s ease-out forwards;
+        }
+
+        @media (max-width: 768px) {
+            .toast-container {
+                top: 10px;
+                right: 10px;
+                left: 10px;
+                max-width: none;
+            }
+
+            .toast {
+                min-width: auto;
+                width: 100%;
+            }
+        }
+
         /* MOBILE RESPONSIVE */
         @media (max-width: 768px) {
             body {
@@ -775,6 +1061,66 @@
 
             .checklist-item label {
                 font-size: 14px;
+            }
+
+            .filter-controls {
+                padding: 18px 16px;
+                margin-bottom: 16px;
+            }
+
+            .filter-row {
+                grid-template-columns: 1fr;
+                gap: 12px;
+                margin-bottom: 12px;
+            }
+
+            .date-range {
+                grid-template-columns: 1fr auto 1fr;
+            }
+
+            .btn-filter {
+                width: 100%;
+                padding: 12px 16px;
+            }
+
+            .results-info {
+                flex-direction: column;
+                gap: 12px;
+                padding: 12px 16px;
+                margin-bottom: 16px;
+            }
+
+            .results-controls {
+                width: 100%;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .per-page-selector {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .per-page-selector select {
+                flex: 1;
+                max-width: 100px;
+            }
+
+            .pagination {
+                flex-wrap: wrap;
+                gap: 6px;
+                padding: 15px 10px;
+            }
+
+            .pagination button {
+                padding: 8px 12px;
+                font-size: 13px;
+            }
+
+            .pagination-info {
+                width: 100%;
+                text-align: center;
+                font-size: 13px;
             }
 
             .stats {
@@ -1083,7 +1429,80 @@
             </div>
         </div>
 
+        <div class="filter-controls">
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label>🔍 Cari Kata Kunci</label>
+                    <input type="text" id="filterKeyword" placeholder="Cari perusahaan, posisi, lokasi..." style="margin: 0;">
+                </div>
+                <div class="filter-group">
+                    <label>📊 Status</label>
+                    <select id="filterStatus" style="margin: 0;">
+                        <option value="">Semua Status</option>
+                        <option value="wishlist">Wishlist</option>
+                        <option value="applied">Applied</option>
+                        <option value="interview">Interview</option>
+                        <option value="offer">Offer</option>
+                        <option value="rejected">Rejected</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>🌐 Platform</label>
+                    <select id="filterPlatform" style="margin: 0;">
+                        <option value="">Semua Platform</option>
+                        <option value="LinkedIn">LinkedIn</option>
+                        <option value="JobStreet">JobStreet</option>
+                        <option value="Glints">Glints</option>
+                        <option value="Kalibrr">Kalibrr</option>
+                        <option value="Indeed">Indeed</option>
+                        <option value="Website Perusahaan">Website Perusahaan</option>
+                        <option value="Email Langsung">Email Langsung</option>
+                        <option value="Referral">Referral</option>
+                        <option value="Walk-in">Walk-in</option>
+                        <option value="Lainnya">Lainnya</option>
+                    </select>
+                </div>
+                <div style="display: flex; gap: 8px;">
+                    <button type="button" class="btn-filter" onclick="applyFilters()">Filter</button>
+                    <button type="button" class="btn-filter btn-reset" onclick="resetFilters()">Reset</button>
+                </div>
+            </div>
+            <div class="filter-row">
+                <div class="filter-group" style="grid-column: 1 / -1;">
+                    <label>📅 Rentang Tanggal Melamar</label>
+                    <div class="date-range">
+                        <input type="date" id="filterDateFrom" style="margin: 0;">
+                        <span class="date-separator">s/d</span>
+                        <input type="date" id="filterDateTo" style="margin: 0;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="results-info">
+            <div class="results-count">
+                Menampilkan <strong id="showingCount">0</strong> dari <strong id="totalCount">0</strong> lamaran
+            </div>
+            <div class="results-controls">
+                <div class="per-page-selector">
+                    <label>Tampilkan:</label>
+                    <select id="perPage" onchange="changePerPage()">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                        <option value="all">Semua</option>
+                    </select>
+                </div>
+                <button class="btn-filter" onclick="exportToExcel()" style="padding: 8px 20px;">
+                    📊 Export Excel
+                </button>
+            </div>
+        </div>
+
         <div class="applications-list" id="applicationsList"></div>
+
+        <div id="paginationContainer"></div>
 
         </div>
 
@@ -1389,10 +1808,10 @@
                             <h4>Metode STAR untuk Pertanyaan Behavioral</h4>
                             <p>Jawab dengan struktur STAR:</p>
                             <ul>
-                                <li><strong>S</strong>ituation: Jelaskan konteks/situasi</li>
-                                <li><strong>T</strong>ask Apa tanggung jawab kamu</li>
-                                <li><strong>A</strong>ction: Apa yang kamu lakukan</li>
-                                <li><strong>R</strong>esult: Hasilnya apa, kalau bisa dengan angka</li>
+                                <li><strong>S</strong>ituasi: Jelaskan konteks/situasi</li>
+                                <li><strong>T</strong>ugas: Apa tanggung jawab kamu</li>
+                                <li><strong>A</strong>ksi: Apa yang kamu lakukan</li>
+                                <li><strong>R</strong>esult/Hasil: Hasilnya apa, kalau bisa dengan angka</li>
                             </ul>
                         </div>
                         <div class="tip-item">
@@ -1616,15 +2035,66 @@
 
     </div>
 
+    <div class="toast-container" id="toastContainer"></div>
+
     <script>
         let applications = JSON.parse(localStorage.getItem('jobApplications')) || [];
         let editingId = null;
+        let currentPage = 1;
+        let itemsPerPage = 10;
+        let filteredApplications = [];
 
         const form = document.getElementById('jobForm');
         const appsList = document.getElementById('applicationsList');
         const submitBtn = document.getElementById('submitBtn');
         const cancelBtn = document.getElementById('cancelBtn');
         const formTitle = document.getElementById('form-title');
+
+        // Toast Notification System
+        function showToast(message, type = 'success', title = '') {
+            const toastContainer = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            
+            const icons = {
+                success: '✅',
+                error: '❌',
+                info: 'ℹ️',
+                warning: '⚠️'
+            };
+
+            const titles = {
+                success: title || 'Berhasil!',
+                error: title || 'Error!',
+                info: title || 'Info',
+                warning: title || 'Perhatian!'
+            };
+
+            toast.innerHTML = `
+                <div class="toast-icon">${icons[type]}</div>
+                <div class="toast-content">
+                    <div class="toast-title">${titles[type]}</div>
+                    <div class="toast-message">${message}</div>
+                </div>
+                <button class="toast-close" onclick="removeToast(this.parentElement)">×</button>
+            `;
+
+            toastContainer.appendChild(toast);
+
+            // Auto remove after 4 seconds
+            setTimeout(() => {
+                removeToast(toast);
+            }, 4000);
+        }
+
+        function removeToast(toast) {
+            toast.classList.add('removing');
+            setTimeout(() => {
+                if (toast.parentElement) {
+                    toast.parentElement.removeChild(toast);
+                }
+            }, 300);
+        }
 
         // Set default date to today
         document.getElementById('date').valueAsDate = new Date();
@@ -1649,7 +2119,7 @@
         // Export data
         function exportData() {
             if (applications.length === 0) {
-                alert('Belum ada data untuk di-export!');
+                showToast('Belum ada data untuk di-export!', 'warning');
                 return;
             }
 
@@ -1664,7 +2134,7 @@
             document.body.removeChild(link);
             URL.revokeObjectURL(url);
             
-            alert('✅ Data berhasil di-export!');
+            showToast('Data berhasil di-export!', 'success');
         }
 
         // Import data
@@ -1678,7 +2148,7 @@
                     const importedData = JSON.parse(e.target.result);
                     
                     if (!Array.isArray(importedData)) {
-                        alert('❌ Format file tidak valid!');
+                        showToast('Format file tidak valid!', 'error');
                         return;
                     }
 
@@ -1687,11 +2157,12 @@
                     if (confirmed) {
                         applications = importedData;
                         saveToLocalStorage();
+                        filteredApplications = [...applications];
                         renderApplications();
-                        alert('✅ Data berhasil di-import!');
+                        showToast(`${importedData.length} data berhasil di-import!`, 'success');
                     }
                 } catch (error) {
-                    alert('❌ Gagal membaca file! Pastikan file berformat JSON yang valid.');
+                    showToast('Gagal membaca file! Pastikan file berformat JSON yang valid.', 'error');
                 }
             };
             reader.readAsText(file);
@@ -1711,6 +2182,144 @@
 
         function getRandomMotivation() {
             return motivationalQuotes[Math.floor(Math.random() * motivationalQuotes.length)];
+        }
+
+        // Filter functions
+        function applyFilters() {
+            const keyword = document.getElementById('filterKeyword').value.toLowerCase();
+            const status = document.getElementById('filterStatus').value;
+            const platform = document.getElementById('filterPlatform').value;
+            const dateFrom = document.getElementById('filterDateFrom').value;
+            const dateTo = document.getElementById('filterDateTo').value;
+
+            filteredApplications = applications.filter(app => {
+                // Keyword filter
+                const keywordMatch = !keyword || 
+                    app.company.toLowerCase().includes(keyword) ||
+                    app.position.toLowerCase().includes(keyword) ||
+                    (app.location && app.location.toLowerCase().includes(keyword)) ||
+                    (app.notes && app.notes.toLowerCase().includes(keyword));
+
+                // Status filter
+                const statusMatch = !status || app.status === status;
+
+                // Platform filter
+                const platformMatch = !platform || app.platform === platform;
+
+                // Date filter
+                let dateMatch = true;
+                if (dateFrom && app.date < dateFrom) dateMatch = false;
+                if (dateTo && app.date > dateTo) dateMatch = false;
+
+                return keywordMatch && statusMatch && platformMatch && dateMatch;
+            });
+
+            currentPage = 1;
+            renderApplications();
+            
+            if (filteredApplications.length === 0) {
+                showToast('Tidak ada data yang sesuai dengan filter', 'info');
+            } else {
+                showToast(`Menampilkan ${filteredApplications.length} dari ${applications.length} lamaran`, 'info');
+            }
+        }
+
+        function resetFilters() {
+            document.getElementById('filterKeyword').value = '';
+            document.getElementById('filterStatus').value = '';
+            document.getElementById('filterPlatform').value = '';
+            document.getElementById('filterDateFrom').value = '';
+            document.getElementById('filterDateTo').value = '';
+            filteredApplications = [...applications];
+            currentPage = 1;
+            renderApplications();
+            showToast('Filter telah direset', 'info');
+        }
+
+        function changePerPage() {
+            const perPageValue = document.getElementById('perPage').value;
+            itemsPerPage = perPageValue === 'all' ? filteredApplications.length : parseInt(perPageValue);
+            currentPage = 1;
+            renderApplications();
+        }
+
+        function goToPage(page) {
+            currentPage = page;
+            renderApplications();
+            window.scrollTo({ top: 300, behavior: 'smooth' });
+        }
+
+        function renderPagination() {
+            const totalPages = Math.ceil(filteredApplications.length / itemsPerPage);
+            const paginationContainer = document.getElementById('paginationContainer');
+
+            if (totalPages <= 1) {
+                paginationContainer.innerHTML = '';
+                return;
+            }
+
+            let paginationHTML = '<div class="pagination">';
+            
+            // Previous button
+            paginationHTML += `<button onclick="goToPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>‹ Prev</button>`;
+
+            // Page numbers
+            for (let i = 1; i <= totalPages; i++) {
+                if (i === 1 || i === totalPages || (i >= currentPage - 2 && i <= currentPage + 2)) {
+                    paginationHTML += `<button class="${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i}</button>`;
+                } else if (i === currentPage - 3 || i === currentPage + 3) {
+                    paginationHTML += '<span style="padding: 0 5px; color: #94a3b8;">...</span>';
+                }
+            }
+
+            // Next button
+            paginationHTML += `<button onclick="goToPage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>Next ›</button>`;
+
+            paginationHTML += '</div>';
+            paginationContainer.innerHTML = paginationHTML;
+        }
+
+        // Export to Excel
+        function exportToExcel() {
+            if (filteredApplications.length === 0) {
+                showToast('Tidak ada data untuk di-export!', 'warning');
+                return;
+            }
+
+            // Prepare data
+            const data = filteredApplications.map(app => ({
+                'Perusahaan': app.company,
+                'Posisi': app.position,
+                'Status': statusLabels[app.status],
+                'Tanggal Melamar': new Date(app.date).toLocaleDateString('id-ID'),
+                'Gaji': app.salary ? `${currencySymbols[app.currency] || 'Rp'} ${app.salary}` : '',
+                'Lokasi': app.location || '',
+                'Platform': app.platform || '',
+                'Catatan': app.notes || ''
+            }));
+
+            // Create CSV content
+            const headers = Object.keys(data[0]);
+            const csvContent = [
+                headers.join(','),
+                ...data.map(row => headers.map(header => {
+                    const value = row[header] || '';
+                    // Escape quotes and wrap in quotes if contains comma
+                    return `"${value.toString().replace(/"/g, '""')}"`;
+                }).join(','))
+            ].join('\n');
+
+            // Create blob and download
+            const blob = new Blob(['\ufeff' + csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', `job-applications-${new Date().toISOString().split('T')[0]}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            showToast(`${filteredApplications.length} data berhasil di-export ke Excel!`, 'success');
         }
 
         function updateStats() {
@@ -1738,7 +2347,19 @@
         };
 
         function renderApplications() {
-            if (applications.length === 0) {
+            // Update counts
+            document.getElementById('totalCount').textContent = filteredApplications.length;
+            
+            // Calculate pagination
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const paginatedApps = itemsPerPage === filteredApplications.length ? 
+                filteredApplications : 
+                filteredApplications.slice(startIndex, endIndex);
+
+            document.getElementById('showingCount').textContent = paginatedApps.length;
+
+            if (filteredApplications.length === 0) {
                 appsList.innerHTML = `
                     <div class="empty-state">
                         <div class="empty-state-icon">🎯</div>
@@ -1754,10 +2375,12 @@
                         </div>
                     </div>
                 `;
+                document.getElementById('paginationContainer').innerHTML = '';
+                updateStats(); // PENTING: Update stats bahkan saat empty
                 return;
             }
 
-            appsList.innerHTML = applications.map(app => `
+            appsList.innerHTML = paginatedApps.map(app => `
                 <div class="app-card">
                     <div class="app-header">
                         <div class="app-title">
@@ -1798,6 +2421,7 @@
                 </div>
             `).join('');
 
+            renderPagination();
             updateStats();
         }
 
@@ -1840,11 +2464,14 @@
                 submitBtn.textContent = '💾 Simpan Lamaran';
                 cancelBtn.style.display = 'none';
                 formTitle.textContent = '✨ Tambah Lamaran Baru';
+                showToast('Lamaran berhasil diupdate!', 'success');
             } else {
                 applications.push({ ...formData, id: Date.now() });
+                showToast('Lamaran berhasil ditambahkan!', 'success');
             }
 
             saveToLocalStorage();
+            filteredApplications = [...applications];
             renderApplications();
             form.reset();
             document.getElementById('date').valueAsDate = new Date();
@@ -1907,13 +2534,17 @@
 
         function deleteApplication(id) {
             if (confirm('Yakin ingin menghapus lamaran ini?')) {
+                const app = applications.find(a => a.id === id);
                 applications = applications.filter(a => a.id !== id);
                 saveToLocalStorage();
+                filteredApplications = [...applications];
                 renderApplications();
+                showToast(`Lamaran ${app.company} - ${app.position} berhasil dihapus`, 'success');
             }
         }
 
         // Initial render
+        filteredApplications = [...applications];
         renderApplications();
 
         // Tab switching
